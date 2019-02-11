@@ -82,8 +82,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\TaskManagerMainWindow.xaml.cs">
-      <DependentUpon>TaskManagerMainWindow.xaml</DependentUpon>
+    <Compile Include="Models\TaskManagerProcess.cs" />
+    <Compile Include="Services\CoreProcessesService.cs" />
+    <Compile Include="Services\IProcessesService.cs" />
+    <Compile Include="ViewModels\TaskManagerMainViewModel.cs" />
+    <Compile Include="Views\TaskManagerMainView.xaml.cs">
+      <DependentUpon>TaskManagerMainView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -113,14 +117,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\TaskManagerMainWindow.xaml">
+    <Page Include="Views\TaskManagerMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

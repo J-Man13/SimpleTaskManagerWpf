@@ -1,0 +1,156 @@
+﻿<Window x:Class="SimpleTaskManagerWpf.Views.TaskManagerMainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleTaskManagerWpf.Views"
+        mc:Ignorable="d"
+        Title="Task Manager" Height="450" Width="600"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        fw:AcrylicWindow.Enabled="True"
+        fw:AcrylicWindow.ShowTitleBar="True" WindowStyle="None" AllowsTransparency="True"  
+        Background="Transparent"
+        >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock  Grid.Row="0"
+                    Grid.Column="2"
+                    Grid.RowSpan="3"
+                    Grid.ColumnSpan="3"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Margin="24,-2,12,13"                   
+                    >Process Searcher</TextBlock>
+
+        <TextBox x:Name="searchProcessTextbox"
+                 Text="{Binding SearchedProcess , UpdateSourceTrigger=PropertyChanged}"                 
+                 Grid.Column="1"              
+                 Grid.Row="3"
+                 Grid.ColumnSpan="5"
+                 Grid.RowSpan="3"
+                 FontSize="22" 
+                 HorizontalContentAlignment="Center"
+                 >
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding SearchProcess}" Gesture="Enter"/>
+            </TextBox.InputBindings>
+        </TextBox>
+        <ListBox x:Name="ListBoxProcesses"
+                 ItemsSource="{Binding ObservableProcesses, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="7"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="7"
+                 Grid.RowSpan="17" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <TextBox Text="{Binding TMProcessId , UpdateSourceTrigger=PropertyChanged}" 
+                                     Width="300"
+                                     FontSize="17"
+                                     IsReadOnly="True" />
+                            <TextBox Text="{Binding TMProcessName , UpdateSourceTrigger=PropertyChanged}" 
+                                     Width="300"
+                                     FontSize="17"
+                                     IsReadOnly="True" Margin="20,0,0,0"/>
+                            <TextBox Text="{Binding TMProcessCpuUsage , UpdateSourceTrigger=PropertyChanged}" 
+                                     Width="300"
+                                     FontSize="17"
+                                     IsReadOnly="True" Margin="20,0,0,0"/>
+                            <TextBox Text="{Binding TMProcessMemoryUsage , UpdateSourceTrigger=PropertyChanged}" 
+                                     Width="300"
+                                     FontSize="17"
+                                     IsReadOnly="True" Margin="20,0,0,0"/>
+
+                            <TextBox Text="{Binding TMPath , UpdateSourceTrigger=PropertyChanged}" 
+                                     Width="300"
+                                     FontSize="17"
+                                     IsReadOnly="True" Margin="20,0,0,0"/>
+
+                            <TextBox Text="{Binding TMPriority , UpdateSourceTrigger=PropertyChanged}" 
+                                     Width="300"
+                                     FontSize="17"
+                                     IsReadOnly="True" Margin="20,0,0,0"/>
+
+                            <Button  Name="killButton"
+                                     Tag="{Binding TMProcessId}"
+                                     Background="Red"
+                                     Content="Kill" 
+                                     Command="{Binding Path=DataContext.ButtonKillProcess ,UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                     CommandParameter="{Binding TMProcessId}"
+                                     Margin="20,0,0,0"
+                                     Visibility="{Binding Visibility}"
+                                     >
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TMProcessId}" Value="Process Id">
+                            <Setter TargetName="killButton" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox x:Name="startProcessTextbox"
+                 FontSize="20"
+                 Grid.Row="24"
+                 Grid.Column="1"
+                 Grid.RowSpan="3"
+                 Grid.ColumnSpan="5"
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 Text="{Binding ProcessToStart, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding StartProcess}" 
+                            Gesture="Enter"
+                            />
+            </TextBox.InputBindings>
+        </TextBox>
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleTaskManagerWpf.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,17 @@ namespace SimpleTaskManagerWpf.Views
     /// <summary>
     /// Interaction logic for TaskManagerMainWindow.xaml
     /// </summary>
-    public partial class TaskManagerMainWindow : Window
+    public partial class TaskManagerMainView : Window
     {
-        public TaskManagerMainWindow()
+        private TaskManagerMainViewModel taskManagerMainViewModel;
+
+        public TaskManagerMainView()
         {
             InitializeComponent();
+            taskManagerMainViewModel = new TaskManagerMainViewModel();
+            DataContext = taskManagerMainViewModel;
+                        
         }
+
     }
 }
